@@ -56,7 +56,6 @@ async function readData(logFilePath) {
 
 async function main() {
     const date = new Date();
-    const logFilePath = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + '_speedtest.log';
 
     const logFolder = './log';
     fs.readdir(logFolder, async(err, files) => {
@@ -75,19 +74,6 @@ async function main() {
                 console.log('[ERROR] impossibile to read data on file...');
             }
         }
-
-        // files.forEach(async (file) => {
-        //     if (await readData('log/' + file)) {
-        //         if (downloadSpeedResults.length > 0 && uploadSpeedResults.length > 0) {
-        //             file = file.slice(0, -4); 
-        //             serviceChart.createChart(downloadSpeedResults, uploadSpeedResults, 'chart/' + file + '.jpg');
-        //         } else {
-        //             console.log('[ERROR] no data on array...');
-        //         }
-        //     } else {
-        //         console.log('[ERROR] impossibile to read data on file...');
-        //     }
-        // });
     });
 }
 
