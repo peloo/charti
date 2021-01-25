@@ -59,19 +59,20 @@ async function main() {
 
     const logFolder = './log';
     fs.readdir(logFolder, async(err, files) => {
-
         for (let file of files) {
-            if (await readData('log/' + file)) {
-                if (downloadSpeedResults.length > 0 && uploadSpeedResults.length > 0) {
-                    file = file.slice(0, -4);
-                    serviceChart.createChart(downloadSpeedResults, uploadSpeedResults, 'chart/' + file + '.jpg');
-                    downloadSpeedResults = [];
-                    uploadSpeedResults = [];
+            if (file.includes('.log')) {
+                if (await readData('log/' + file)) {
+                    if (downloadSpeedResults.length > 0 && uploadSpeedResults.length > 0) {
+                        file = file.slice(0, -4);
+                        serviceChart.createChart(downloadSpeedResults, uploadSpeedResults, 'chart/' + file + '.jpg');
+                        downloadSpeedResults = [];
+                        uploadSpeedResults = [];
+                    } else {
+                        console.log('[ERROR] no data on array...');
+                    }
                 } else {
-                    console.log('[ERROR] no data on array...');
+                    console.log('[ERROR] impossibile to read data on file...');
                 }
-            } else {
-                console.log('[ERROR] impossibile to read data on file...');
             }
         }
     });

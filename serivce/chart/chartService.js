@@ -81,7 +81,7 @@ class Chartervice {
             legend.fontWeight(600);
 
             // console.log('Set position to print chart and dimeson image');
-            chart.bounds(0, 0, 2000, 1080);
+            chart.bounds(0, 0, 6000, 1920);
 
             // Set the container id
             // console.log('Initiate drawing the chart');
