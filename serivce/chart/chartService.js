@@ -87,22 +87,27 @@ class Chartervice {
             // console.log('Initiate drawing the chart');
             chart.container("container").draw();
 
-            // generate JPG image and save it to a file
-            anychartExport.exportTo(chart, 'jpg').then(function(image) {
-                fs.writeFile(chartName, image, function(fsWriteError) {
-                    if (fsWriteError) {
-                        console.log(fsWriteError);
-                    } else {
-                        console.log('Chart ' + chartName + ' complete');
-                    }
+            return new Promise((resolve, reject) => {
+                // generate JPG image and save it to a file
+                anychartExport.exportTo(chart, 'jpg').then(function(image) {
+                    fs.writeFile(chartName, image, function(fsWriteError) {
+                        if (fsWriteError) {
+                            console.log(fsWriteError);
+                            reject(false);
+                        } else {
+                            console.log('Chart ' + chartName + ' complete');
+                            resolve(true);
+                        }
+                    });
+                }, function(generationError) {
+                    console.log(generationError);
                 });
-            }, function(generationError) {
-                console.log(generationError);
-            });
+            })
+
         } catch (error) {
             console.log(error);
-        }
 
+        }
     }
 
 }

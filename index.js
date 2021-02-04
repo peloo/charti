@@ -55,6 +55,7 @@ async function readData(logFilePath) {
 }
 
 async function main() {
+    let index = 0;
     const date = new Date();
 
     const logFolder = './log';
@@ -64,7 +65,7 @@ async function main() {
                 if (await readData('log/' + file)) {
                     if (downloadSpeedResults.length > 0 && uploadSpeedResults.length > 0) {
                         file = file.slice(0, -4);
-                        serviceChart.createChart(downloadSpeedResults, uploadSpeedResults, 'chart/' + file + '.jpg');
+                        await serviceChart.createChart(downloadSpeedResults, uploadSpeedResults, 'chart/' + file + '.jpg');
                         downloadSpeedResults = [];
                         uploadSpeedResults = [];
                     } else {
@@ -74,6 +75,7 @@ async function main() {
                     console.log('[ERROR] impossibile to read data on file...');
                 }
             }
+            ++index;
         }
     });
 }
